@@ -123,6 +123,99 @@ def poly_mult_aux(poly_array_1, poly_array_2):
     
 	return poly_result
 
+
+def descartes(poly_array):
+    """ Retorna uma matriz de possibilidades de raízes reais positivas (coluna 0) / reais negativas (coluna 1) / complexas  (coluna 2) """
+    poly_array_aux = [ x for x in poly_array if x is not 0 ]
+    print(poly_array_aux)
+    # contar troca de sinais em poly_array
+    delta_x = 0
+    i = 0
+    while i < len(poly_array_aux) + 1:
+        aux_1 = poly_array_aux[i]
+        aux_2 = poly_array_aux[i+1]
+        if (aux_1 > 0 and aux_2 < 0) or (aux_1 < 0 and aux_2 > 0):
+            delta_x += 1
+    # contar troca de sinais em -poly_array (exceto posições pares)
+    delta_minus_x = 0
+    i = 0
+    while i < len(poly_array_aux) + 1:
+        if (i % 2 == 0):
+            aux_1 = poly_array_aux[i]
+            aux_2 = -poly_array_aux[i+1]
+        else :
+            aux_1 = -poly_array_aux[i]
+            aux_2 = poly_array_aux[i+1]
+        if (aux_1 > 0 and aux_2 < 0) or (aux_1 < 0 and aux_2 > 0):
+            delta_minus_x += 1
+    # montando matriz de possibilidades
+    degree = getDegreePoly(poly_array)
+    lines = 0
+    x = delta_x // 2 
+    y = delta_minus_x // 2
+    if x > y:
+        lines = x
+    else :
+        lines = y
+    possibility_matrix = [ [ 0 for i in range(3) ] for j in range(lines + 1) ]
+    """
+    delta_x = 4
+    delta_minus_x = 2
+    grau 7
+        
+        pos    neg   comp   total
+        4       2       1       7
+        4       0       3       7
+        2       2       3       7
+        2       0       5       7
+        0       2       5       7
+        0       0       7       7
+
+    """
+    # TODO 
+    return possibility_matrix
+
+
+def complex_roots_tests(poly_array):
+    t = len(poly_array)
+    for i in range(1, t-1):
+        if poly_array[i] <= poly_array[i-1]*poly_array[i+1]:
+            return True
+        if poly_array[i] == 0 and poly_array[i-1]*poly_array[i+1] > 0:
+            return True
+        if poly_array[i-1] == 0 and poly_array[i] == 0:
+            return True
+        if poly_array[i] == 0 and poly_array[i+1] == 0:
+            return True
+    return False
+    
+
+def fujiwara(poly_array):
+        t = len(poly_array)
+        n = t - 1
+        d = poly_array[n]
+        partial_results =  [0] * t
+        for i in range(0, n):
+            partial_results[i] = abs(poly_array[i]/d) ** (1/(n-i))
+        return 2*max(partial_results)
+
+
+def poly_evaluate(poly_array, value):
+        result = 0
+        for i in range(0, len(poly_array)):
+            result += poly_array[i] * (value ** i)
+        return result
+
+
+def derivate(poly_array):
+    print(poly_array)
+    poly_result = poly_array
+    poly_result.pop(0)
+    for i in range(len(poly_result)):
+        poly_result[i] = poly_result[i] * (i+1)
+    return poly_result
+   
+
 ### Fim das funcoes auxiliares ###
 
 @app.route('/')
@@ -213,12 +306,21 @@ def poly_div():
 		aux[(len(poly_actual) - 1) - (len(poly_array_2) - 1)] = dividendo // divisor
 		poly_result[(len(poly_actual) - 1) - (len(poly_array_2) - 1)] = dividendo // divisor
 		poly_actual2 = poly_mult_aux(aux, poly_array_2)
-        poly_actual = poly_sub_aux(poly_actual, poly_actual2)
-        while poly_actual[-1] == 0:
-            poly_actual.pop()
+		poly_actual = poly_sub_aux(poly_actual, poly_actual2)
+		while poly_actual[-1] == 0:
+			poly_actual.pop()
     
 	return jsonify({'name' : poly_array_to_string(poly_result)})
 
+
+@app.route('/root', methods=['POST'])
+def newton(poly_array):
+	poly_1 = request.form['name']
+	initial_x = 'ser'
+	epsilon = ''
+	max_iter = 50
+	derivate_array = 'der'
+	epsilon = 0.0000001
 
 if __name__ == '__main__':
 	app.run(debug=True)
