@@ -150,14 +150,25 @@ def descartes(poly_array):
             delta_minus_x += 1
     # montando matriz de possibilidades
     degree = getDegreePoly(poly_array)
-    lines = 0
-    x = delta_x // 2 
-    y = delta_minus_x // 2
-    if x > y:
-        lines = x
-    else :
-        lines = y
-    possibility_matrix = [ [ 0 for i in range(3) ] for j in range(lines + 1) ]
+    x = (delta_x // 2) + 1
+    y = (delta_minus_x // 2) + 1
+    possibility_matrix = [[ 0 for i in range(3) ] for j in range(x*y)]
+    possible_pos_roots = [delta_x - 2*i for i in range(x) if (delta_x - 2*i) >= 0]
+    possible_neg_roots = [delta_minus_x - 2*i for i in range(y) if (delta_minus_x - 2*i) >= 0]
+
+    print(possible_pos_roots)
+    print(possible_neg_roots)
+
+    for i in range(x):
+        for j in range(y):
+            if(i == 0):
+                possibility_matrix[i][j]= possible_pos_roots[j]
+            if(i == 1):
+                possibility_matrix[i][j]= possible_neg_roots[j]
+
+    # TODO completar comp roots (degree - sum(#real roots))
+        
+
     """
     delta_x = 4
     delta_minus_x = 2
@@ -172,7 +183,7 @@ def descartes(poly_array):
         0       0       7       7
 
     """
-    # TODO 
+     
     return possibility_matrix
 
 
@@ -322,5 +333,13 @@ def newton(poly_array):
 	derivate_array = 'der'
 	epsilon = 0.0000001
 
-if __name__ == '__main__':
-	app.run(debug=True)
+#if __name__ == '__main__':
+#	app.run(debug=True)
+
+
+#tests
+#descartes([2,-1,-2,1])
+t1 = [7-2*i for i in range(4) if (7-2*i) >= 0]
+t2 = [3-2*i for i in range(4) if (3-2*i) >= 0]
+print(t1)
+print(t2)
