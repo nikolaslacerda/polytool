@@ -14,8 +14,17 @@ html, body, #root {
     margin-top: 20px;
     width: 100%;
     height: 400px;
-    background-color: #ffffff;
     display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
+#bargraph {
+    margin-top: 10px;
+    width: 1200px;
+    height: 400px;
+    display: flex;
+    position: absolute;
     justify-content: center;
     align-items: baseline;
 }
@@ -26,6 +35,14 @@ body {
   
 body, input, button {
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.input-poly:focus {
+    border: 1px solid #673ab7;
+}
+
+#x_value_1, #x_value_2 {
+    width: 80px;
 }
 
 .login-container {
@@ -61,34 +78,6 @@ body, input, button {
     color: #666;
 }
 
-.buttons-rg {
-    margin-top: 20px;
-    margin-left: 5px;
-    border: 0;
-    border-radius: 4px;
-    height: 48px;
-    width: 65px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #FFF;
-    background-color: #673ab7;
-    cursor: pointer;  
-}
-
-.buttons-rg:disabled {
-    margin-top: 20px;
-    margin-left: 5px;
-    border: 0;
-    border-radius: 4px;
-    height: 48px;
-    width: 65px;
-    font-size: 16px;
-    font-weight: bold;
-    color: #FFF;
-    background-color: #666;
-    cursor: pointer;  
-}
-
 .buttons-math {
     margin-top: 20px;
     margin-left: 5px;
@@ -101,7 +90,7 @@ body, input, button {
     text-align: center;
     color: #FFF;
     background-color: #673ab7;
-    cursor: pointer;  
+    cursor: pointer;   
 }
 
 .buttons-math:disabled {
@@ -195,4 +184,147 @@ a.float:hover + div.label-container{
   opacity: 1;
 }
 
+/* General button style (reset) */
+.btn {   
+    margin-top: 20px;
+    margin-left: 5px;
+	border: none; /**/
+	font-family: inherit; /**/
+	font-size: inherit; /**/
+	color: inherit; /**/
+	cursor: pointer; /**/
+	padding: 15px 30px;
+	display: inline-block;	
+    font-weight: bold; /**/
+    border-radius: 4px; /**/
+	outline: none;
+	position: relative;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.btn:disabled {   
+    margin-top: 20px;
+    margin-left: 5px;
+	border: none; /**/
+	font-family: inherit; /**/
+	font-size: inherit; /**/
+	color: inherit; /**/
+	cursor: pointer; /**/
+	
+	display: inline-block;	
+    font-weight: bold; /**/
+    border-radius: 4px; /**/
+
+}
+
+.btn:after:enabled {
+	content: '';
+	position: absolute;
+	z-index: -1;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+/* Pseudo elements for icons */
+.btn:before:enabled {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	position: relative;
+	-webkit-font-smoothing: antialiased;
+}
+
+.icon-root:enabled:before {
+	content: url(ic_root.png);
+
+}
+
+.icon-graph:enabled:before {
+	content: url(ic_graph.png);
+}
+
+/* Button 5 */
+.btn-5 {
+    background-color: #673ab7;   
+	color: #fff;
+    height: 48px;
+	width: 80px;
+	font-size: 16px;
+	overflow: hidden;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
+
+.btn-5:disabled {
+    background-color: #666;   
+	color: #fff;
+    height: 48px;
+	width: 80px;
+	font-size: 16px;
+}
+
+.btn-5:active:enabled {
+	top: 2px;
+}
+
+.btn-5 span {
+	display: inline-block;
+	width: 100%;
+    height: 100%;
+    margin-left: -30px;
+	-webkit-transition: all 0.3s;
+	-webkit-backface-visibility: hidden;
+	-moz-transition: all 0.3s;
+	-moz-backface-visibility: hidden;
+	transition: all 0.3s;
+	backface-visibility: hidden;
+}
+
+.btn-5:disabled span {
+	display: inline-block;
+	width: 100%;
+    height: 100%;
+    margin-left: -30px;
+	
+}
+
+.btn-5:enabled:before{
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	line-height: 2.0;
+	font-size: 180%;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.btn-5:active:before {
+	color: #703b87;
+}
+
+/* Button 5a */
+.btn-5a:hover:enabled span {
+	-webkit-transform: translateY(300%);
+	-moz-transform: translateY(300%);
+	-ms-transform: translateY(300%);
+	transform: translateY(300%);
+}
+
+.btn-5a:before {
+	left: 0;
+	top: -100%;
+}
+
+.btn-5a:hover:before {
+	top: 0;
+}
 

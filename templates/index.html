@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Polytool</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+</head>
+<body>
+    <body>
+
+        <div class="top">
+            <div class="logo">
+                <img class="img-logo" src="/static/img/logo.svg"/>
+                <p>POLYTOOL</p>
+            </div>
+        </div>
+    
+        <div class="login-container">
+            <div class="login-container-2">
+                <div class="container-1">
+                    <input type="text" class="input-poly" id="poly_1" placeholder="Digite um Polinômio">
+                    <button id="btn_root_1" class="btn btn-5 btn-5a icon-root" type="submit" disabled><span>Raizes</span></button>
+                    <button id="btn_graph_1" class="btn btn-5 btn-5a icon-graph" type="submit" disabled><span>Gráfico</span></button>
+                    <input type="text" class="inputx" id="x_value_1" placeholder="x">
+                    <button id="btn_evalue_1" class="buttons-math" type="submit" disabled>>></button> 
+                </div>
+                    
+                <div class="container-1">
+                    <input type="text" class="input-poly" id="poly_2" placeholder="Digite um Polinômio">
+                    <button id="btn_root_2" class="btn btn-5 btn-5a icon-root" type="submit" disabled><span>Raizes</span></button>
+                    <button id="btn_graph_2" class="btn btn-5 btn-5a icon-graph" type="submit" disabled><span>Gráfico</span></button>
+                    <input type="text" class="inputx" id="x_value_2" placeholder="x">
+                    <button id="btn_evalue_2" class="buttons-math" type="submit" disabled>>></button> 
+                </div>
+        
+                <div class="container-1">
+                    <button id="btn_sum" class="buttons-math" type="submit" disabled>+</button>
+                    <button id="btn_sub" class="buttons-math" type="submit" disabled>-</button>
+                    <button id="btn_mul" class="buttons-math" type="submit" disabled>*</button>
+                    <button id="btn_div" class="buttons-math" type="submit" disabled>/</button>
+                    <input type="text" class="input-poly" id="poly_result" placeholder="" readonly="readonly">
+                </div>
+
+                <div id="root">
+                        <div class="chart" id="bargraph">
+                            <script>
+                                var graphs = {{plot | safe}};
+                                Plotly.plot('bargraph',graphs,{});
+                            </script>
+                        </div>
+                </div>
+                <!-- Não deu tempo :/ 
+                <a href="#" class="float">
+                            
+                    <img class="my-float" src="/static/img/control.png"/>
+                </a>
+                
+                <div class="label-container">
+                    <div class="label-text">Jogar</div>
+                    <i class="fa fa-play label-arrow"></i>
+                </div>
+                -->
+            </div>
+        </div>
+        <script src="{{ url_for('static', filename='js/jquery-1.11.1.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/plots.js') }}"></script>
+    </body>
+</html>
